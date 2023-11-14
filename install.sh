@@ -48,11 +48,9 @@ function main() {
 
     python ./get-pip.py
 
-    cp $SCRIPT_PATH/dotfiles/.xinitrc ~/.xinitrc
-    cp $SCRIPT_PATH/dotfiles/.zshrc ~/.zshrc
-    cp $SCRIPT_PATH/dotfiles/.vimrc ~/.vimrc
+    cp $SCRIPT_PATH/displaymanager/dotfiles/.xinitrc ~/.xinitrc
+    cp $SCRIPT_PATH/displaymanager/dotfiles/.zshrc ~/.zshrc
     cp -r $SCRIPT_PATH/displaymanager/pictures ~/
-    cp $SCRIPT_PATH/dotfiles/.xinitrc ~/.xinitrc
 
     export PATH="~/.local/bin/:$PATH"
 
