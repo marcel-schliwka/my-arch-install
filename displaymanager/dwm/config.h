@@ -28,6 +28,18 @@ static const char *colors[][3]      = {
 /* tagging */
 static const char *tags[] = { "1", ";-)", "3", "4", "5", "6", "7", "8", "9" };
 
+void shiftview(const Arg *arg) {
+    Arg shifted;
+    if(arg->i > 0) // Wenn die Eingabe größer als 0 ist, wechsle zum nächsten Tag
+        shifted.ui = (selmon->tagset[selmon->seltags] << arg->i)
+                     | (selmon->tagset[selmon->seltags] >> (LENGTH(tags) - arg->i));
+    else // Andernfalls wechsle zum vorherigen Tag
+        shifted.ui = selmon->tagset[selmon->seltags] >> -arg->i
+                     | selmon->tagset[selmon->seltags] << (LENGTH(tags) + arg->i);
+    view(&shifted);
+}
+
+
 static const Rule rules[] = {
 	/* xprop(1):
 	 *	WM_CLASS(STRING) = instance, class
@@ -94,6 +106,8 @@ static Key keys[] = {
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
 	{ MODKEY,                       XK_u,      setlayout,      {0} },
+        { MODKEY,                       XK_Left,   shiftview,      {.i = -1} },
+        { MODKEY,                       XK_Right,  shiftview,      {.i = +1} },
 	{ MODKEY|ShiftMask,             XK_u,      togglefloating, {0} },
 //	{ MODKEY,                       XK_F5,     xrdb,           {.v = NULL } },
 //	{ MODKEY,              		XK_n,      shiftview,      { .i = +1 } },
