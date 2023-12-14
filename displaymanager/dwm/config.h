@@ -26,7 +26,8 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "1", ";-)", "3", "4", "5", "6", "7", "8", "9" };
+static const char *tags[] = { "😁", "😇", "💻", "👾", "💀", "💞", "💤", "🎵", "🍄" };
+
 
 void shiftview(const Arg *arg) {
     Arg shifted;
@@ -81,6 +82,7 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", norm_fg, "-nf", norm_border, "-sb", urg_bg, "-sf", sel_fg, NULL };
 static const char *termcmd[]  = { "st", NULL };
+static const char *emoji[] = { "dmenu-emoji.sh", NULL };
 
 #include "selfrestart.c"
 
@@ -88,7 +90,7 @@ static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_space,  spawn,          SHCMD("dmenu_run")},
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
-    { ALTKEY,                       XK_space,   spawn,         SHCMD("rofimoji")},
+	{ MODKEY|ALTKEY,                XK_space,  spawn,          {.v = emoji } },
 	{ MODKEY,			XK_g,	   spawn,	   SHCMD("google-chrome-stable")},
 	{ MODKEY|ShiftMask,		XK_minus,  spawn,	   SHCMD("pactl set-sink-volume alsa_output.usb-Yamaha_Corporation_MG-XU-00.analog-stereo -10%")},
 	{ MODKEY|ShiftMask,		XK_plus,   spawn,	   SHCMD("pactl set-sink-volume alsa_output.usb-Yamaha_Corporation_MG-XU-00.analog-stereo +10%")},
